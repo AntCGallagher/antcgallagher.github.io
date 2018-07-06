@@ -6,9 +6,14 @@ let n = 150;
 let points = [];
 let centres = [];
 
+let frameCount = 0;
+let counter;
+
 function setup() {
 	createCanvas(500,500);
 	rectMode(CENTER)
+
+	counter = select('#framecount');
 
 	let centre_indices = [];
 	// Choose n random points
@@ -35,7 +40,6 @@ function setup() {
 		p.population = 0;
 	 	centres.push(p);
 	}
-	
 
 	frameRate(3);
 }
@@ -44,6 +48,8 @@ function draw() {
 	colorMode(HSB);
 	background(10);
 	noStroke();
+
+	counter.html('Step: ' + frameCount);
 
 	// Draw points as circles and cluster centres as rectangles
 	for (let i = 0; i < points.length; i++) {
@@ -83,6 +89,7 @@ function draw() {
 		centres[points[i].cluster].y += (points[i].y / cluster_population);  
 	}
 
+	frameCount++;
 }
 
 // Returns euclidean distance between two points (p1, p2)
